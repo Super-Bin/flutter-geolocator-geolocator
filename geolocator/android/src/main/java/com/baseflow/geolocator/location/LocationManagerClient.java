@@ -126,9 +126,11 @@ class LocationManagerClient implements LocationClient, LocationListener {
       Log.i("zzb", "onLocationChanged 获取结果 " + " getLatitude = " + location.getLatitude() + " getLongitude = " + location.getLongitude());
     float desiredAccuracy =
         locationOptions != null ? accuracyToFloat(locationOptions.getAccuracy()) : 50;
+      Log.i("zzb", "location.getAccuracy 获取结果 " + location.getAccuracy() + " desiredAccuracy = " + desiredAccuracy);
 
     if (isBetterLocation(location, currentBestLocation)
         && location.getAccuracy() <= desiredAccuracy) {
+        Log.i("zzb", "onLocationChanged 回调给Flutter ");
       this.currentBestLocation = location;
 
       if (this.positionChangedCallback != null) {
@@ -256,6 +258,7 @@ class LocationManagerClient implements LocationClient, LocationListener {
   private static float accuracyToFloat(LocationAccuracy accuracy) {
     switch (accuracy) {
       case lowest:
+        return 1000;
       case low:
         return 500;
       case medium:
